@@ -37,9 +37,6 @@ topic: setFillColor(1,0.5,0.7)
 --this number will be an index to locate the strings in the table myText
 local textIndex=math.random(1,3) --inclusive
 
---display the word
-local randomWord = display.newText (myText[textIndex], 250,200,"Calibri",50)
-randomWord:setTextColor(1,1,1)
 
 
 --Set up the image sheet for animation
@@ -52,6 +49,7 @@ local sheetData = {
 
 local mySheet = graphics.newImageSheet("mysheet.png", sheetData)
 
+--set up the speed
 local fishmove = {name = "normalRun", start=1, count = 6, time=1000}
 
 
@@ -59,6 +57,42 @@ local animation = display.newSprite( mySheet, fishmove )
 animation.x = display.contentWidth/1.7
 animation.y = display.contentHeight/1.5
 animation:play()
+
+
+--create a button
+local widget = require( "widget" )
+
+-- Function to handle button events
+local function handleButtonEvent( event )
+
+    if ( "began" == event.phase ) then
+    local randomWord = display.newText (myText[textIndex], 250,200,"Calibri",50)
+    randomWord:setTextColor(1,1,1)
+    --if ("ended" == event.phase ) then
+
+
+     end  -- print( "Button was pressed and released" )
+
+    
+
+end
+
+local button1 = widget.newButton
+{   
+	x = 550,
+	y = 200,
+    width = 200,
+    height = 100,
+    defaultFile = "button.png",
+    overFile = "buttonpressed.png",
+    label = "Try it",
+    labelColor = { default={1,1,1}, over={0,0,0}},
+    font = "Calibri",
+    fontSize = 40,
+    onEvent = handleButtonEvent
+}
+
+--fuction: button: tap(event)
 
 
 
